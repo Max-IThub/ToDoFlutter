@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list/todoitem.dart';
 
 class AddItemScreen extends StatelessWidget {
-  const AddItemScreen({super.key});
+  final List<TodoItem> todoItems;
+  final Function(TodoItem) onAddItem;
+
+  AddItemScreen({Key? key, required this.todoItems, required this.onAddItem}) : super(key: key);
+
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+
+  void addItem() {
+    String title = titleController.text;
+    String description = descriptionController.text;
+
+    TodoItem newItem = TodoItem(title: title, isCompleted: false, description: description);
+    onAddItem(newItem);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -10,14 +25,14 @@ class AddItemScreen extends StatelessWidget {
         title: const Text('Добавить задачу'),
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        leading:  IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new), 
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new),
           onPressed: () {
             Navigator.of(context).pop();
           },
-          ),
+        ),
       ),
-      body: const Column(
+      body: Column(
         children: [
           Expanded(
             child: Row(
@@ -25,28 +40,35 @@ class AddItemScreen extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: TextField(
-                    decoration: InputDecoration(
+                    controller: titleController,
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Название задачи',
-                    )
-                  )
+                    ),
+                  ),
                 ),
                 Expanded(
                   flex: 1,
                   child: TextField(
-                    decoration: InputDecoration(
+                    controller: descriptionController,
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Описание задачи',
-                    )
-                  )
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
-          Column(children: [
-          
-          ],)
-        ]
+          Column(
+            children: [
+              ElevatedButton(
+                onPressed: addItem,
+                child: const Text('Добавить задачу'),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
