@@ -17,38 +17,37 @@ class AddItemScreen extends StatelessWidget {
           },
           ),
       ),
-      body: const Expanded(
-        child:
-        Column(
+      body: const Column(
         children: [
-          Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Название задачи',
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Название задачи',
+                    )
                   )
-                )
-              ),
-              Expanded(
-                flex: 1,
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Описание задачи',
+                ),
+                Expanded(
+                  flex: 1,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Описание задачи',
+                    )
                   )
-                )
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
           Column(children: [
           
           ],)
         ]
-        )
-       ),
+      ),
     );
   }
 }
