@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/todoitem.dart';
+import 'package:todo_list/storage.dart';
 
 class AddItemScreen extends StatelessWidget {
   final List<TodoItem> todoItems;
@@ -10,13 +11,20 @@ class AddItemScreen extends StatelessWidget {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
-  void addItem() {
-    String title = titleController.text;
-    String description = descriptionController.text;
+  void addItem(BuildContext context) {
+  String title = titleController.text;
+  String description = descriptionController.text;
 
-    TodoItem newItem = TodoItem(title: title, isCompleted: false, description: description);
-    onAddItem(newItem);
-  }
+  TodoItem newItem = TodoItem(title: title, isCompleted: false, description: description);
+
+  onAddItem(newItem); 
+
+  Storage.saveData('todoItems', todoItems);
+
+  Navigator.pop(context);
+}
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +71,10 @@ class AddItemScreen extends StatelessWidget {
           Column(
             children: [
               ElevatedButton(
-                onPressed: addItem,
+                onPressed: () => addItem(context),
                 child: const Text('Добавить задачу'),
               ),
+
             ],
           ),
         ],
