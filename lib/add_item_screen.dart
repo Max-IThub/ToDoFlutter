@@ -6,25 +6,25 @@ class AddItemScreen extends StatelessWidget {
   final List<TodoItem> todoItems;
   final Function(TodoItem) onAddItem;
 
-  AddItemScreen({Key? key, required this.todoItems, required this.onAddItem}) : super(key: key);
+  AddItemScreen({Key? key, required this.todoItems, required this.onAddItem})
+      : super(key: key);
 
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
   void addItem(BuildContext context) {
-  String title = titleController.text;
-  String description = descriptionController.text;
+    String title = titleController.text;
+    String description = descriptionController.text;
 
-  TodoItem newItem = TodoItem(title: title, isCompleted: false, description: description);
+    TodoItem newItem =
+        TodoItem(title: title, isCompleted: false, description: description);
 
-  onAddItem(newItem); 
+    onAddItem(newItem);
 
-  Storage.saveData('todoItems', todoItems);
+    Storage.saveData('todoItems', todoItems);
 
-  Navigator.pop(context);
-}
-
-
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,6 @@ class AddItemScreen extends StatelessWidget {
                 onPressed: () => addItem(context),
                 child: const Text('Добавить задачу'),
               ),
-
             ],
           ),
         ],

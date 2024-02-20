@@ -18,7 +18,8 @@ class CurrentItemScreenState extends State<CurrentItemScreen> {
   void initState() {
     super.initState();
     _titleController = TextEditingController(text: widget.todoItem.title);
-    _descriptionController = TextEditingController(text: widget.todoItem.description);
+    _descriptionController =
+        TextEditingController(text: widget.todoItem.description);
   }
 
   @override
